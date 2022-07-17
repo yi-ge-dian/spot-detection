@@ -7,18 +7,23 @@
 #include <opencv2/core.hpp>
 #include <opencv2/highgui.hpp>
 #include "src/gray_level_transformation.h"
+#include "src/utils.h"
 
 using namespace std;
 using namespace cv;
 
 int main(int argc, char **argv) {
-    // load image
-    string path ="../resources/img/test1.jpeg";
-    Mat image = imread(path);
-    if (image.empty()) {
-        printf("Image not loaded");
+    /**-------加载图片--------*/
+    string path ="../resources/img/test.jpg";
+    Mat source_img;
+    bool result = load_image(path, source_img);
+    if (!result) {
+        cout << "load image failed" << endl;
         return -1;
     }
+    /**-------背景相减--------*/
+    Mat background_subtraction_img;
+
 
     // call gray_trans function
     float pixels[256];
@@ -28,7 +33,7 @@ int main(int argc, char **argv) {
     gray_trans(image, imageLog, pixels);
 
     //show image
-    imshow("image", image);
+    //imshow("image", image);
     waitKey(0);
     return 0;
 }

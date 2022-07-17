@@ -17,8 +17,8 @@ void gray_trans(const Mat& src, Mat& dst,float* mapping)
         dst = Mat(src.size(), CV_32FC1);
         for (int i = 0; i < src.rows; i++)
         {
-            float* p1 = dst.ptr<float>(i);
-            const uchar* p2 = src.ptr<uchar>(i);
+            auto* p1 = dst.ptr<float>(i);
+            const auto* p2 = src.ptr<uchar>(i);
             for (int j = 0; j < src.cols; j++)
                 p1[j] = mapping[p2[j]];
         }
